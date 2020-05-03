@@ -6,4 +6,4 @@ then
 	exit 1;
 fi
 
-pipenv install $1 && pipenv lock -r > requirements.txt
+find . -name "*$1" | xargs wc -l | sort -nr

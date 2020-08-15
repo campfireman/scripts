@@ -59,3 +59,18 @@ sudo docker run -i -t -d -p 9981:80 --restart=always \
     -v /app/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice \
     -v /app/onlyoffice/DocumentServer/db:/var/lib/postgresql -e JWT_ENABLED='true' -e JWT_SECRET='<token>' onlyoffice/documentserver
 ```
+
+## test performance of drive
+```
+dd if=/dev/zero of=/media/ture/LE_QUICK/tmp/output conv=fdatasync bs=1000k count=1k
+```
+
+## unrar rar archive with password
+```
+unrar e -pPASSWORD_WITHOU_SPACE archive.rar
+```
+
+## transform markdown to pdf with latex
+```
+pandoc --filter pandoc-citeproc --bibliography=ref.bib --csl=ieee.csl test1.md -o test1.pdf
+```

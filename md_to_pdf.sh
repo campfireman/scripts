@@ -1,34 +1,20 @@
 #! /bin/bash
 
-if [ -z "$1" ]
-then
-	echo "bib file not set";
-	exit 1;
+STYLE_DIR="/home/ture/lib/latex-styles"
+
+if [ -f "ref.bib" ]; then
+	ref="--filter pandoc-citeproc --bibliography ref.bib --csl $STYLE_DIR/ieee.csl"
+else
+	ref=""
 fi
 
-if [ -z "$2" ]
-then
-	echo "stylesheet not set";
-	exit 1;
+if [ -f $STYLE_DIR"/defaults.yaml" ]; then
+	defaults="--metadata-file $STYLE_DIR/defaults.yaml"
+else
+	defaults=""
 fi
 
-if [ -z "$3" ]
-then
-	echo "metadata file not set";
-	exit 1;
-fi
-
-if [ -z "$4" ]
-then
-	echo "input file not set";
-	exit 1;
-fi
-
-if [ -z "$5" ]
-then
-	echo "ouput file not set";
-	exit 1;
-fi
-
-
-TEXINPUTS=$TEXINPUTS":~/lib/latex-styles" pandoc --filter pandoc-citeproc  --from markdown --bibliography="$1"  --csl="$2" --metadata-file "$3" "$4" -o "$5"
+for file in *.md; do
+	filename=$(basename -s .md $file)
+	TEXINPUTS=$TEXINPUTS":$STYLE_DIR" pandoc --from markdown $ref $defaults $file -o $filename".pdf"
+done

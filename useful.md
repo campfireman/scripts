@@ -53,7 +53,14 @@ Include /etc/letsencrypt/options-ssl-apache.conf
 
 run:
 ```
-sudo docker run -i -t -d -p 9981:80 --restart=always \
+sudo docker run -i -t -d -p 9981:80 --name=office  --restart=always \
+    -v /app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice  \
+    -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data  \
+    -v /app/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice \
+    -v /app/onlyoffice/DocumentServer/db:/var/lib/postgresql -e JWT_ENABLED='true' -e JWT_SECRET='<token>' onlyoffice/documentserver
+
+    -v /app/onlyoffice/DocumentServer/plugins:/var/www/onlyoffice/documentserver/sdkjs-plugins \
+    sudo docker run -i -t -d -p 9981:80 --restart=always \
     -v /app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice  \
     -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data  \
     -v /app/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice \

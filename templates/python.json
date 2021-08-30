@@ -1,0 +1,16 @@
+{
+    "files": [
+        {
+            "origin": "python_.gitignore",
+            "path": ".gitignore"
+        },
+        {
+            "origin": "EMPTY_README.md",
+            "path": "README.md"
+        },
+        {
+            "origin": "MIT_LICENSE",
+            "path": "LICENSE"
+        }
+    ]
+}

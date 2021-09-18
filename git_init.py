@@ -161,12 +161,20 @@ class GitInitializer:
         sys.exit(1)
 
     def init_template(self):
-        # expect the script to run in the script dir
+        '''
+        function expects the current working directory to be the repo path
+        '''
+        # expects the templates to sit in the script dir
         template_dir = os.path.join(self.script_path, 'templates')
         with open(os.path.join(template_dir, f'{self.template}.json')) as template_file:
             template = json.loads(template_file.read())
 
+        logger.info('Executing commands from template')
         file_dir = os.path.join(template_dir, "files")
+        for command in template['commands']:
+            subprocess.call(command)
+
+        logger.info('Creating files from template')
         for file in template["files"]:
             shutil.copy(os.path.join(file_dir, file["origin"]), os.path.join(
                 self.repo_path, file["path"]))
@@ -220,6 +228,8 @@ class GitInitializer:
         subprocess.call(["git", "remote", "add", "origin", gitlab_remote_url])
         subprocess.call(["git", "push", "origin", "master"])
         logger.info('Setup remote for git')
+
+        raise Exception('test')
 
 
 def main():

@@ -1,4 +1,9 @@
 {
+    "commands": [
+        ["mkdir", "src"],
+        ["virtualenv", "env"],
+        ["touch", "requirements.txt"]
+    ],
     "files": [
         {
             "origin": "python_.gitignore",

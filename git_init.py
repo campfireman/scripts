@@ -169,15 +169,17 @@ class GitInitializer:
         with open(os.path.join(template_dir, f'{self.template}.json')) as template_file:
             template = json.loads(template_file.read())
 
-        logger.info('Executing commands from template')
         file_dir = os.path.join(template_dir, "files")
-        for command in template['commands']:
-            subprocess.call(command)
+        if 'commands' in template:
+            logger.info('Executing commands from template')
+            for command in template['commands']:
+                subprocess.call(command)
 
-        logger.info('Creating files from template')
-        for file in template["files"]:
-            shutil.copy(os.path.join(file_dir, file["origin"]), os.path.join(
-                self.repo_path, file["path"]))
+        if 'files' in template:
+            logger.info('Creating files from template')
+            for file in template["files"]:
+                shutil.copy(os.path.join(file_dir, file["origin"]), os.path.join(
+                    self.repo_path, file["path"]))
 
     def run(self):
         # check local repo name availability

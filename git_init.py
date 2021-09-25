@@ -231,8 +231,6 @@ class GitInitializer:
         subprocess.call(["git", "push", "origin", "master"])
         logger.info('Setup remote for git')
 
-        raise Exception('test')
-
 
 def main():
     parser = argparse.ArgumentParser(

@@ -1,0 +1,19 @@
+{
+    "commands": [
+        ["cargo", "init"]
+    ],
+    "files": [
+        {
+            "origin": "rust.gitignore",
+            "path": ".gitignore"
+        },
+        {
+            "origin": "EMPTY_README.md",
+            "path": "README.md"
+        },
+        {
+            "origin": "MIT_LICENSE",
+            "path": "LICENSE"
+        }
+    ]
+}

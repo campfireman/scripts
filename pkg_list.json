@@ -1,0 +1,22 @@
+{
+    "standard": [
+        "git",
+        "thunderbird",
+        "chromium",
+        "firefox",
+        "terminator",
+        "keepassxc",
+        "telegram-desktop",
+        "nextcloud-client",
+        "flameshot",
+        "yay",
+        "python-pip"
+    ],
+    "aur": [
+        "visual-studio-code-bin",
+        "zotero",
+        "obsidian",
+        "autojump",
+        "protonmail-bridge"
+    ]
+}

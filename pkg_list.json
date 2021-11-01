@@ -10,7 +10,10 @@
         "nextcloud-client",
         "flameshot",
         "yay",
-        "python-pip"
+        "python-pip",
+	"rustup",
+	"filezilla",
+	"texlive-science"
     ],
     "aur": [
         "visual-studio-code-bin",

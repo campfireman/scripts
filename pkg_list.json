@@ -13,13 +13,15 @@
         "python-pip",
 	"rustup",
 	"filezilla",
-	"texlive-science"
+	"texlive-science",
+	"autorandr"
     ],
     "aur": [
         "visual-studio-code-bin",
         "zotero",
         "obsidian",
         "autojump",
-        "protonmail-bridge"
+        "protonmail-bridge",
+	"spotify"
     ]
 }

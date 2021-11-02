@@ -23,5 +23,13 @@
         "autojump",
         "protonmail-bridge",
 	"spotify"
+    ],
+    "pip": [
+	    "matplotlib",
+	    "coloredlogs",
+	    "numpy",
+	    "pandas",
+	    "autopep8",
+	    "pylint"
     ]
 }

@@ -13,3 +13,6 @@ with open('pkg_list.json', 'r') as file:
     # install AUR packages
     subprocess.call(['yay', '--sudoloop',  '--answerclean',
                     'NotInstalled', '--answerdiff', 'None', '-S', *pkg_list['aur']])
+
+    # install pip packages
+    subprocess.call(['pip', 'install', *pkg_list['pip']])

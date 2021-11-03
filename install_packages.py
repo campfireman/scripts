@@ -1,9 +1,10 @@
 #! /usr/bin/python3
 
 import json
+import os
 import subprocess
 
-with open('pkg_list.json', 'r') as file:
+with open(os.path.join(os.path.dirname(__file__), 'pkg_list.json'), 'r') as file:
     pkg_list = json.loads(file.read())
 
     # install standard packages

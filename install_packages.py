@@ -17,3 +17,6 @@ with open(os.path.join(os.path.dirname(__file__), 'pkg_list.json'), 'r') as file
 
     # install pip packages
     subprocess.call(['pip', 'install', *pkg_list['pip']])
+
+    # install cpan packages
+    subprocess.call(['sudo', 'cpan', *pkg_list['cpan']])

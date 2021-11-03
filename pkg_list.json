@@ -14,7 +14,8 @@
 	"rustup",
 	"filezilla",
 	"texlive-science",
-	"autorandr"
+	"autorandr",
+	"okular"
     ],
     "aur": [
         "visual-studio-code-bin",
@@ -31,5 +32,12 @@
 	    "pandas",
 	    "autopep8",
 	    "pylint"
+    ],
+    "cpan": [
+	    "Log::Log4perl",
+	    "Log::Dispatch",
+	    "YAML::Tiny",
+	    "File::HomeDir",
+	    "Unicode::GCString"
     ]
 }

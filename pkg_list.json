@@ -15,7 +15,10 @@
 	"filezilla",
 	"texlive-science",
 	"autorandr",
-	"okular"
+	"okular",
+	"docker",
+	"docker-compose"
+
     ],
     "aur": [
         "visual-studio-code-bin",

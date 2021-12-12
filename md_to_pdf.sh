@@ -3,7 +3,7 @@
 STYLE_DIR="/home/ture/lib/latex-styles"
 
 if [ -f "ref.bib" ]; then
-	ref="--filter pandoc-citeproc --bibliography ref.bib --csl $STYLE_DIR/ieee.csl"
+	ref="--filter citeproc --bibliography ref.bib --csl $STYLE_DIR/ieee.csl"
 else
 	ref=""
 fi

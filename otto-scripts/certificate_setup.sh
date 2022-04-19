@@ -11,8 +11,13 @@ if [ -z $1 ]
   then echo "Please enter a folder containing the certificates"
   exit
 fi
-CERT_DIR=$1
-echo ${HOME}
+CERT_DIR="${1}"
+
+if [ ! -d  "${CERT_DIR}" ]
+  then echo "Please enter a path to a directory!"
+  exit
+fi
+
 # make sure cert directory exists
 sudo mkdir -p ${SYSTEM_CERT_DIR}
 

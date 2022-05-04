@@ -1,0 +1,16 @@
+{
+    "laptop_private": {
+        "default": {
+            "eDP": "--mode 2880x1800 --rate 90",
+            "HDMI-A-0": "--off",
+            "DisplayPort-0": "--off",
+            "DisplayPort-1": "--off"
+        },
+        "desk": {
+            "eDP": "--mode 2880x1800 --rate 90",
+            "HDMI-A-0": "--off",
+            "DisplayPort-0": "--off",
+            "DisplayPort-1": "--off"
+        }
+    }
+}

@@ -165,7 +165,7 @@ class GitInitializer:
         function expects the current working directory to be the repo path
         '''
         # expects the templates to sit in the script dir
-        template_dir = os.path.join(self.script_path, 'templates')
+        template_dir = os.path.join(self.script_path, 'assets', 'templates')
         with open(os.path.join(template_dir, f'{self.template}.json')) as template_file:
             template = json.loads(template_file.read())
 

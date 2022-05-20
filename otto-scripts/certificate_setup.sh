@@ -4,17 +4,27 @@
 
 # the system wide certificate registry
 SYSTEM_CERT_DIR="/usr/share/ca-certificates/extra/"
+SYSTEM="debian"
+VALID_SYSTEMS=("debian" "arch")
 
 # the folder containing the certificates to be added
 # expects the certificates to be added to either end in .txt or .pem.txt
-if [ -z $1 ]
-  then echo "Please enter a folder containing the certificates"
-  exit
+if [ -z $1 ]; then 
+	echo "Please enter a folder containing the certificates"
+	exit
 fi
 CERT_DIR=$1
-echo ${HOME}
+
+if [ -n $2 ]; then
+	SYSTEM=$2
+	if [[ ! " ${VALID_SYSTEMS[*]} " =~ " ${SYSTEM} " ]]; then
+		echo "Valid systems are: ${VALID_SYSTEMS[*]}"
+	fi
+fi
 # make sure cert directory exists
-sudo mkdir -p ${SYSTEM_CERT_DIR}
+if [ "${SYSTEM}" == "debian" ]; then 
+	sudo mkdir -p ${SYSTEM_CERT_DIR}
+fi
 
 # Convert all certificates and add to all browsers
 # thanks to https://web.archive.org/web/20210618230257/https://thomas-leister.de/en/how-to-import-ca-root-certificate/
@@ -27,10 +37,13 @@ for FILENAME in ${CERT_DIR}/*.txt; do
 	# conversion
 	echo "Converting ${FILENAME} to ${CERT_FILEPATH}"
 	sudo openssl x509 -in "${FILENAME}" -inform PEM -out "${CERT_FILEPATH}"
+	if [ "${SYSTEM}" == "arch" ]; then
+		echo "Adding ${BASE_FILENAME} to trust anchor"
+		sudo trust anchor --store "${CERT_FILEPATH}"
+	fi
 
 	# search all cert DBs and add certificate to it
-	for CERT_DB in $(find ${HOME} -name "cert9.db")
-	do
+	for CERT_DB in $(find ${HOME} -name "cert9.db"); do
 		CERTDIR=$(dirname ${CERT_DB})
 		echo "Adding ${BASE_FILENAME} ${CERT_DB} to certificate database in ${CERTDIR}"
 		certutil -A -n "${BASE_FILENAME}" -t "TC,C,T" -i ${CERT_FILEPATH} -d sql:${CERTDIR}
@@ -39,8 +52,10 @@ for FILENAME in ${CERT_DIR}/*.txt; do
 	echo ""
 done
 
-echo "Copying all .crt certificates in ${CERT_DIR} to ${SYSTEM_CERT_DIR}"
-sudo cp ${CERT_DIR}/*.crt ${SYSTEM_CERT_DIR}
+if [ "${SYSTEM}" == "debian" ]; then
+	echo "Copying all .crt certificates in ${CERT_DIR} to ${SYSTEM_CERT_DIR}"
+	sudo cp ${CERT_DIR}/*.crt ${SYSTEM_CERT_DIR}
 
-echo "Adding certificates from ${SYSTEM_CERT_DIR} to /etc/ca-certificates.conf with update-ca-certificates"
-sudo dpkg-reconfigure ca-certificates
+	echo "Adding certificates from ${SYSTEM_CERT_DIR} to /etc/ca-certificates.conf with update-ca-certificates"
+	sudo dpkg-reconfigure ca-certificates
+fi

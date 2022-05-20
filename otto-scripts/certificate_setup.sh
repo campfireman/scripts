@@ -4,8 +4,11 @@
 
 # the system wide certificate registry
 SYSTEM_CERT_DIR="/usr/share/ca-certificates/extra/"
-SYSTEM="debian"
 VALID_SYSTEMS=("debian" "arch")
+
+# arguments
+CERT_DIR=""
+SYSTEM="debian"
 
 # the folder containing the certificates to be added
 # expects the certificates to be added to either end in .txt or .pem.txt
@@ -20,10 +23,6 @@ if [ -n $2 ]; then
 	if [[ ! " ${VALID_SYSTEMS[*]} " =~ " ${SYSTEM} " ]]; then
 		echo "Valid systems are: ${VALID_SYSTEMS[*]}"
 	fi
-fi
-# make sure cert directory exists
-if [ "${SYSTEM}" == "debian" ]; then 
-	sudo mkdir -p ${SYSTEM_CERT_DIR}
 fi
 
 # Convert all certificates and add to all browsers
@@ -53,9 +52,17 @@ for FILENAME in ${CERT_DIR}/*.txt; do
 done
 
 if [ "${SYSTEM}" == "debian" ]; then
+	# make sure cert directory exists
+	sudo mkdir -p ${SYSTEM_CERT_DIR}
+
 	echo "Copying all .crt certificates in ${CERT_DIR} to ${SYSTEM_CERT_DIR}"
 	sudo cp ${CERT_DIR}/*.crt ${SYSTEM_CERT_DIR}
+	chmod 644 ${SYSTEM_CERT_DIR}/*.crt
 
 	echo "Adding certificates from ${SYSTEM_CERT_DIR} to /etc/ca-certificates.conf with update-ca-certificates"
-	sudo dpkg-reconfigure ca-certificates
+ 	for f in ${SYSTEM_CERT_DIR}/*.crt; do
+		cp ${f} /usr/share/ca-certificates/
+		echo $(basename ${f}) >> /etc/ca-certificates.conf;
+	done
+	sudo update-ca-certificates
 fi

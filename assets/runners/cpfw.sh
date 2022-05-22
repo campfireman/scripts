@@ -1,5 +1,9 @@
 #!/bin/bash
+
+### Copyright @ Cornelius Buschka ###
+
 LOCAL_BIN=${HOME}/.local/bin
+
 mkdir -p ${LOCAL_BIN}
 if [ ! -f "${LOCAL_BIN}/cpfw-login" ]; then
 	  curl -L -o /tmp/cpfw-login_amd64 https://github.com/felixb/cpfw-login/releases/download/v0.3/cpfw-login_amd64 

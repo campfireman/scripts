@@ -1,0 +1,12 @@
+{
+    "standard": [
+	    "globalprotect-openconnect"
+    ],
+    "aur": [
+	    "displaylink"
+    ],
+    "pip": [
+    ],
+    "cpan": [
+    ]
+}

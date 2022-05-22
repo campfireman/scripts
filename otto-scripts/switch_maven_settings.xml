@@ -1,0 +1,18 @@
+#!/bin/bash
+
+envName=${1:-noEnvName}
+fqFile="$HOME/.m2/settings-${envName}.xml"
+if [ ! -f "$fqFile" ]; then
+  echo "No file $fqFile."
+  exit 1
+fi
+if [ -f "$HOME/.m2/settings.xml" ]; then
+  if [ ! -s "$HOME/.m2/settings.xml" ]; then
+    mv $HOME/.m2/settings.xml $HOME/.m2/settings.xml.bak
+    echo "Backed up $HOME/.m2/settings.xml."
+  else
+    rm $HOME/.m2/settings.xml
+  fi
+fi
+ln -s $fqFile $HOME/.m2/settings.xml
+exit 0

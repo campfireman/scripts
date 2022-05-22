@@ -18,6 +18,11 @@ if [ -z $1 ]; then
 fi
 CERT_DIR=$1
 
+if [ ! -d  "${CERT_DIR}" ]
+  then echo "Please enter a path to a directory!"
+  exit
+fi
+
 if [ -n $2 ]; then
 	SYSTEM=$2
 	if [[ ! " ${VALID_SYSTEMS[*]} " =~ " ${SYSTEM} " ]]; then

@@ -9,6 +9,7 @@ import subprocess
 import sys
 import urllib
 
+import keyring
 import requests
 
 from utils import logger
@@ -21,7 +22,7 @@ class HttpApi:
 
     @property
     def _authorization_token(self) -> str:
-        return os.environ[self.AUTH_TOKEN_NAME]
+        return keyring.get_password("system", self.AUTH_TOKEN_NAME)
 
     @property
     def _authorization_header(self) -> dict:

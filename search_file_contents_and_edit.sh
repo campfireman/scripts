@@ -9,7 +9,7 @@ function print_usage() {
 cat << EOF
 
 SYNOPSIS:
-	Usage: ${0} PATTERN [DIRECTORY ...]
+	${0} PATTERN [DIRECTORY ...]
 
 DESCRIPTION:
 	Recurses into given directories and searches for a given pattern

@@ -1,4 +1,5 @@
 convert/*
+venv/
 
 ### python ###
 # Byte-compiled / optimized / DLL files

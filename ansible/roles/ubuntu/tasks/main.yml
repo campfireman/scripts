@@ -1,0 +1,10 @@
+- name: Insert custom block into .profile
+  ansible.builtin.blockinfile:
+    path: "{{ user_home }}/.profile"
+    block: |
+      setxkbmap -option caps:swapescape
+- name: Copy .zshrc into home
+  ansible.builtin.template:
+    src: templates/.zshrc.j2
+    dest: "{{ user_home }}/.zshrc"
+    mode: 0644

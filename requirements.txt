@@ -1,2 +1,4 @@
 requests==2.25.1
 keyring==23.5.1
+ansible==2.13.0
+

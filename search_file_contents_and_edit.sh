@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # arguments
 PATTERN=$1
@@ -43,3 +43,4 @@ if [ -z "${SELECTED_FILE_PATH}" ]; then
 fi
 
 ${EDITOR} "${SELECTED_FILE_PATH}" -c ":${SELECTED_FILE_LINE}"
+echo "${EDITOR} ${SELECTED_FILE_PATH} -c :${SELECTED_FILE_LINE}" >> ${HOME}/.zhistory

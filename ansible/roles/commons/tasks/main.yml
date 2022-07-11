@@ -4,4 +4,4 @@
     dest: "{{ user_home }}/{{ item.dest }}"
   loop:
     - { src: ".vimrc.j2", dest: ".vimrc" }
-    - { src: ".gitconfig.j2", dest: "gitconfig" }
+    - { src: ".gitconfig.j2", dest: ".gitconfig" }

@@ -1,0 +1,19 @@
+" GENERAL
+filetype on
+filetype plugin on
+syntax on
+set noshowmode
+
+" THEMING
+set background=dark
+let g:molokai_original = 1
+colorscheme molokai
+
+" PLUGINS
+call plug#begin('~/.vim/plugins')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'sheerun/vim-polyglot'
+call plug#end()
+

@@ -1,0 +1,7 @@
+- name: Copy dotfiles into home
+  ansible.builtin.template:
+    src: "templates/{{ item.src }}"
+    dest: "{{ user_home }}/{{ item.dest }}"
+  loop:
+    - { src: ".vimrc.j2", dest: ".vimrc" }
+    - { src: ".gitconfig.j2", dest: "gitconfig" }

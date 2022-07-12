@@ -1,13 +1,10 @@
-- name: Insert custom block into .profile
-  ansible.builtin.blockinfile:
-    path: "{{ user_home }}/.profile"
-    block: |
-      setxkbmap -option caps:swapescape
-- name: Copy .zshrc into home
+- name: Copy ubuntu specific dotfiles into home
   ansible.builtin.template:
-    src: templates/.zshrc.j2
-    dest: "{{ user_home }}/.zshrc"
+    src: "templates/{{ item.src }}"
+    dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0644
+  loop:
+    - { src: ".zshrc.j2", dest: ".zshrc" }
 - name: Install UNIX tools from apt
   become: true
   ansible.builtin.apt:

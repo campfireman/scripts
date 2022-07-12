@@ -5,6 +5,8 @@
     mode: 0644
   loop:
     - { src: ".zshrc.j2", dest: ".zshrc" }
+- name: Swap escape and caps lock
+  ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 - name: Install UNIX tools from apt
   become: true
   ansible.builtin.apt:

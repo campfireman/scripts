@@ -54,20 +54,6 @@
 #       - autojump
 #       - protonmail-bridge-bin
 
-- name: Copy dotfiles into home
-  ansible.builtin.template:
-    src: "templates/{{ item.src }}"
-    dest: "{{ user_home }}/{{ item.dest }}"
-  loop:
-    - { src: ".zshrc.j2", dest: ".zshrc" }
-
-- name: Create desktop entries
-  ansible.builtin.template:
-    src: "{{ item }}"
-    dest: "{{ user_home }}/.local/share/applications/{{ item | basename | regex_replace('\\.j2$', '') }}"
-  with_fileglob:
-    - ../templates/desktop-entries/*.j2
-
 - name: Install CPAN packages
   community.general.cpanm:
     name: "{{ item }}"
@@ -76,3 +62,17 @@
     - Log::Dispatch
     - YAML::Tiny
     - File::HomeDir
+
+- name: Ensure directory structure for templates exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/{{ item.path }}"
+    state: directory
+  with_filetree: templates/
+  when: item.state == 'directory'
+
+- name: Ensure files are populated from templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ user_home }}/{{ item.path | dirname }}/{{ item.path | basename | regex_replace('\\.j2$', '') }}"
+  with_filetree: templates/
+  when: item.state == 'file'

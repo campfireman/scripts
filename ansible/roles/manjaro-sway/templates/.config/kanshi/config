@@ -1,0 +1,13 @@
+profile {
+	output eDP-1 position 5920,572 scale 1.8
+	output DP-5 position 1440,492
+	output DP-6 position 3360,132
+}
+profile {
+	output eDP-1 position 5920,572 scale 1.8
+	output DP-3 position 1440,492
+	output DP-4 position 3360,132
+}
+profile {
+	output eDP-1 position 5920,572 scale 1.8
+}

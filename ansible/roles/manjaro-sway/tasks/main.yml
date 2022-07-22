@@ -63,14 +63,14 @@
     - YAML::Tiny
     - File::HomeDir
 
-- name: Ensure directory structure for templates exists
+- name: Ensure directory structure for templates in user home exists
   ansible.builtin.file:
     path: "{{ user_home }}/{{ item.path }}"
     state: directory
   with_filetree: templates/
   when: item.state == 'directory'
 
-- name: Ensure files are populated from templates
+- name: Ensure files are populated from templates to user home
   template:
     src: "{{ item.src }}"
     dest: "{{ user_home }}/{{ item.path | dirname }}/{{ item.path | basename | regex_replace('\\.j2$', '') }}"

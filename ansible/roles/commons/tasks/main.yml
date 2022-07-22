@@ -5,3 +5,10 @@
   loop:
     - { src: ".vimrc.j2", dest: ".vimrc" }
     - { src: ".gitconfig.j2", dest: ".gitconfig" }
+
+- name: Install pip packages
+  ansible.builtin.pip:
+    name:
+      - numpy
+      - matplotlib
+      - pandas

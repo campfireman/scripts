@@ -1,3 +1,59 @@
+- name: Install arch packages
+  community.general.pacman:
+    name:
+      # general
+      - yay
+      - thunar
+      - thunderbird
+      - chromium
+      - firefox
+      - keepassxc
+      - nextcloud-client
+      - telegram-desktop
+      - flameshot
+      - filezilla
+      - okular
+      - libreoffice-fresh
+      # programming
+      - git
+      - alacritty
+      - python-pip
+      - rustup
+      - texlive-science
+      - docker
+      - docker-compose
+      - ttf-hack
+      # wayland
+      - kanshi
+      - wdisplays
+      # UNIX tools
+      - jq
+      - fx
+      - xsv
+      - bat
+      - git-delta
+      - tree
+    state: present
+
+# # hmm...
+# - name: Install packages from AUR
+#   ansible.builtin.command:
+#     argv:
+#       - yay
+#       - -Sq
+#       - --answerclean
+#       - NotInstalled
+#       - --answerdiff
+#       - None
+#       - --sudoloop
+#       - --noconfirm
+#       - spotify
+#       - visual-studio-code-bin
+#       - zotero
+#       - obsidian
+#       - autojump
+#       - protonmail-bridge-bin
+
 - name: Copy dotfiles into home
   ansible.builtin.template:
     src: "templates/{{ item.src }}"
@@ -11,3 +67,12 @@
     dest: "{{ user_home }}/.local/share/applications/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob:
     - ../templates/desktop-entries/*.j2
+
+- name: Install CPAN packages
+  community.general.cpanm:
+    name: "{{ item }}"
+  loop:
+    - Log::Log4perl
+    - Log::Dispatch
+    - YAML::Tiny
+    - File::HomeDir
